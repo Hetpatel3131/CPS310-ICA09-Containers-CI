@@ -1,65 +1,62 @@
-# CPS 310 Support Ticket Summary
+# CPS 310 — ICA09: Containers and Continuous Integration
 
-This starter project is used for the Containers & Continuous Integration ICA.
+This project reads support tickets from a CSV file and prints the total,
+open, and high-priority ticket counts.
 
-## What the Program Does
+## Run locally on macOS
 
-The program:
+Create and activate a virtual environment:
 
-- loads settings from `config.json`
-- reads ticket data from `tickets.csv`
-- counts total tickets
-- counts open tickets
-- counts high-priority tickets
-- prints a summary to the terminal
-
-## Requirements
-
-- Python 3.12 or newer
-- Git
-
-Install dependencies with:
-
-```text
-python -m pip install -r requirements.txt
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
 ```
 
-## Run the Program
+Install dependencies:
 
-### Windows
-
-```text
-python app.py
+```bash
+python3 -m pip install -r requirements.txt
 ```
 
-### macOS
+Run the application:
 
-```text
+```bash
 python3 app.py
 ```
 
-## Run the Tests
+Run the tests:
 
-### Windows
-
-```text
-python -m pytest -v
-```
-
-### macOS
-
-```text
+```bash
 python3 -m pytest -v
 ```
 
-## Important
+## Run with Docker
 
-This starter project intentionally does **not** include:
+Start Docker Desktop before using these commands.
 
-```text
-Dockerfile
-.dockerignore
-.github/workflows/tests.yml
+Build the image:
+
+```bash
+docker build -t cps310-ticket-summary .
 ```
 
-You will create those during the ICA.
+Run the application:
+
+```bash
+docker run --rm cps310-ticket-summary
+```
+
+Run the tests inside a container:
+
+```bash
+docker run --rm cps310-ticket-summary python -m pytest -v
+```
+
+## Continuous integration
+
+The workflow is located at `.github/workflows/tests.yml`.
+
+GitHub Actions runs the tests on pushes and pull requests.
+It prepares Python 3.12, installs the dependencies, and runs pytest.
+
+Results are available in the repository's Actions tab.
